@@ -1,0 +1,84 @@
+use vague; 
+
+# a not entirely serious pragmatic module to introduce vagueness
+# into your programming and allow more vagueness-oriented 
+# programming constructs
+
+
+NAME
+    vague - Perl pragma to reduce precision in your programming constructs
+
+SYNOPSIS
+        use vague;
+
+DESCRIPTION
+    This pragma exports a set of new, imprecise keywords into your namespace
+    to facilitate fuzzy programming methodologies and nondeterministic
+    algorithms.
+
+    none, hardly, few, some, many, quite, lots, most, almost, nearly, all
+        If given a list of arguments these methods return some random subset
+        of the list, from roughly 'none' items to roughly 'all' of them. If
+        given a single scalar that is numeric they return a number that is
+        appropriately smaller than the input variable. If given a string
+        they return an appropriately long substring, starting at the start
+        of the string.
+
+    any (@list)
+        In scalar context it returns an element from its list of arguments.
+        In list context it returns the entire list, shuffled.
+
+                $x = any of qw(a b c d e f g h i j);
+                foreach ( any qw(a b c d e f g h i j) ) {
+                #...
+
+    roughly ($scalar [ $ceiling [ $floor [ $spread ]]])
+        Returns a number that is roughly $scalar. Optionally you can supply
+        a ceiling, and a floor, to limit the range returned. The $spread
+        argument just says how wide the deviations can be.
+
+    generally $coderef or probably $coderef
+        Probably execute the code referred to. You can say, for example:
+
+                probably sub { print "Hello world\n"; };
+                generally \&trace('message');
+
+    random number, random word
+        Returns a pseudo-random word if followed by 'word', or pseudo-random
+        integer otherwise. The sequence repeats every 20 calls to this
+        functions. Occasionally you will get 'feck!' or 22/7 returned
+        instead of one of the usual values. This is normal behaviour.
+
+    of  Does nothing, but allows nice English-like constructions such as:
+
+                for (most of 1..20) { # etc...
+
+EXAMPLES
+            print some of 1, 2, 3, 4, 5, 6, 7, 8, 9, 10;
+            print nearly all of "And did those feet in ancient times walk upon England's mountains green.";
+            print hardly any of "And did those feet in ancient times walk upon England's mountains green.";
+
+            my $number = roughly 20;
+            $number = almost 20;
+
+            my @widgets = qw(a b c d e f g);
+            my $x = any @widgets;
+
+            for (most of 1..20) {
+                    generally \&foo('hello');
+            }
+
+            probably sub { foo('prob') };
+
+            for (1..30) {
+                    print random word, " ", random number, "\n";
+            }
+
+            sub foo { my $msg = shift; print "In foo msg $msg\n"; }
+
+AUTHOR AND COPYRIGHT
+    P Kent, pause@selsyn.co.uk Nov 2001 This is covered by the same terms as
+    Perl itself.
+
+    $Id: README,v 1.5 2001/12/20 05:14:43 piers Exp $
+

@@ -1,0 +1,7 @@
+LICENSE
+MANIFEST
+Makefile.PL
+README
+lib/vague.pm
+t/01main.t
+vaguetest.plx
